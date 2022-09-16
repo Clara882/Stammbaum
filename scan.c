@@ -14,10 +14,19 @@ int const DB_SIZE = 20;
 
 struct person
 {
-    int  personalnummer;
-    char nachname[20];
-    char vorname[20];
+    int nummer;
     int  geburtsjahr;
+    int todesjahr;
+    char vorname[10];
+    char nachname[10];
+    char M_vorname[10];
+    char M_nachname[10];
+    char V_vorname[10];
+    char V_nachname[10];
+    char Partner[10];
+    char Kind_1[10];
+    char Kind_2[10];
+    char Kind_3[10];
 };
 typedef struct person person_t;
 
@@ -34,18 +43,36 @@ void readcsv(char const* const datei)
     }
     person_t database[DB_SIZE];
     while(fscanf(filepointer,
-                 "%d,%[^,],%[^,],%d",
-                 &database[zaehler].personalnummer,
-                 database[zaehler].nachname,
+                 "%d,%d,%d,%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,]",
+                 &database[zaehler].nummer,
+		 &database[zaehler].geburtsjahr,
+		 &database[zaehler].todesjahr,
                  database[zaehler].vorname,
-                 &database[zaehler].geburtsjahr)
+                 database[zaehler].nachname,
+                 database[zaehler].M_vorname,
+		 database[zaehler].M_nachname,
+		 database[zaehler].V_vorname,
+		 database[zaehler].V_nachname,
+		 database[zaehler].Partner,
+		 database[zaehler].Kind_1,
+		 database[zaehler].Kind_2,
+		 database[zaehler].Kind_3)
           != EOF)
     {
-        printf("%d, %s, %s, %d \n",
-               database[zaehler].personalnummer,
-               database[zaehler].nachname,
-               database[zaehler].vorname,
-               database[zaehler].geburtsjahr);
+        printf("%d, %d, %d, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s \n",
+                database[zaehler].nummer,
+		database[zaehler].geburtsjahr,
+		database[zaehler].todesjahr,
+		database[zaehler].vorname,
+		database[zaehler].nachname,
+		database[zaehler].M_vorname,
+		database[zaehler].M_nachname,
+		database[zaehler].V_vorname,
+		database[zaehler].V_nachname,
+		database[zaehler].Partner,
+		database[zaehler].Kind_1,
+		database[zaehler].Kind_2,
+		database[zaehler].Kind_3);
         zaehler++;
         if(zaehler == DB_SIZE)
         {
